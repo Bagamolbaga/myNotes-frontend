@@ -2,6 +2,7 @@ import MarkdownEditor from '@uiw/react-markdown-editor'
 import {Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {editNote} from '../store/actions'
+import {editAsyncNotes} from '../store/asyncActions'
 import {useState} from 'react'
 
 const NoteEditForm = ({note}) => {
@@ -13,7 +14,7 @@ const NoteEditForm = ({note}) => {
   const [md, setMd] = useState(note.text) || ''
 
   const isDisableBtnSave = title.length && md.length
-console.log(note)
+  
   return (
     <div className='noteCreateForm__container'>
       <input
@@ -33,7 +34,8 @@ console.log(note)
       <div className='noteCreateForm__container-btn_save-container'>
         <Button
           disabled={!isDisableBtnSave}
-          onClick={() => dispatch(editNote({title: title, text: md}))}
+          // onClick={() => dispatch(editNote({title: title, text: md}))}
+          onClick={() => dispatch(editAsyncNotes({title: title, text: md}))}
           className='noteCreateForm__container-btn_save'
         >
           EDIT

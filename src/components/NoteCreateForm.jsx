@@ -33,10 +33,8 @@ const NoteCreateForm = () => {
           disabled={!isDisableBtnSave}
           // onClick={() => dispatch(createNote({title: title, text: md}))}
           onClick={() => dispatch(createAsyncNote({
-            title: 'test bd 2',
-            text: 'test text bd 2',
-            user_id: 3,
-            group_id: 2
+            title: title,
+            text: md
           }))}
           className='noteCreateForm__container-btn_save'
         >

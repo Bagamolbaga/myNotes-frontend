@@ -9,7 +9,8 @@ import {
     SHOW_ACTIVE_GROUP,
     SELECT_NOTE,
     EDIT_SELECT_NOTE,
-    SHOW_EDIT_NOTE_FORM
+    SHOW_EDIT_NOTE_FORM,
+    SET_USER
   } from './actions'
   
   
@@ -23,7 +24,7 @@ import {
       id: 5,
       name: 'Baga',
       avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
-      isLogin: true
+      isLogin: false
     },
     groups: [],
     notes: []
@@ -38,17 +39,17 @@ import {
         }
 
       case CREATE_NOTE:
-        let newNotes = [...state.notes]
-        let newNote = {
-          id: +state.notes.length + 1,
-          group: state.selectedGroup,
-          title: action.payload.title,
-          text: action.payload.text
-        }
+        // let newNotes = [...state.notes]
+        // let newNote = {
+        //   id: +state.notes.length + 1,
+        //   group: state.selectedGroup,
+        //   title: action.payload.title,
+        //   text: action.payload.text
+        // }
         return {
           ...state,
           showCeateNoteForm: false,
-          notes: [...newNotes, newNote]
+          notes: [...state.notes, action.payload]
         }
 
       case GET_GROUP:
@@ -58,14 +59,14 @@ import {
         }
   
       case CREATE_GROUP:
-        let newGroups = [...state.groups]
-        let newGroup = {
-          id: +state.groups.length + 1,
-          title: action.payload
-        }
+        // let newGroups = [...state.groups]
+        // let newGroup = {
+        //   id: +state.groups.length + 1,
+        //   title: action.payload
+        // }
         return {
           ...state,
-          groups: [...newGroups, newGroup]
+          groups: [...state.groups, action.payload]
         }
   
       case SHOW_ALL_NOTES:
@@ -108,8 +109,9 @@ import {
           selectNoteId: action.payload
         }
   
-       case EDIT_SELECT_NOTE:
+      case EDIT_SELECT_NOTE:
         let notes = [...state.notes]
+        console.log(action.payload)
         notes.map(note => {
           if(note.id === state.selectNoteId) {
             note.title = action.payload.title
@@ -121,6 +123,17 @@ import {
           ...state,
           notes: [...notes],
           showEditNoteForm: false
+        }
+
+      case SET_USER:
+        return {
+          ...state,
+          user: {
+            id: 5,
+            name: 'Baga',
+            avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
+            isLogin: true
+          }
         }
     
       default:

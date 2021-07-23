@@ -9,6 +9,7 @@ export const SHOW_ACTIVE_GROUP = 'SHOW_ACTIVE_GROUP'
 export const SELECT_NOTE = 'SELECT_NOTE'
 export const EDIT_SELECT_NOTE = 'EDIT_SELECT_NOTE'
 export const SHOW_EDIT_NOTE_FORM = 'SHOW_EDIT_NOTE_FORM'
+export const SET_USER = 'SET_USER'
 
 
 
@@ -86,6 +87,13 @@ export const selectNote = (id) => {
 export const editNote = (value) => {
   return {
     type: EDIT_SELECT_NOTE,
+    payload: value
+  }
+}
+
+export const setUser = (value) => {
+  return {
+    type: SET_USER,
     payload: value
   }
 }

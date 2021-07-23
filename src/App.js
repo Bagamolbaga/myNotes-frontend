@@ -6,7 +6,7 @@ import {Provider} from 'react-redux'
 import {store} from './store/store'
 
 //import 'bootstrap/dist/css/bootstrap.min.css'
-import "./style.css";
+import "./styles.scss";
 
 export default function App() {
   return (

@@ -6,7 +6,11 @@ import {
   createGroup,
   selectActiveGroup,
 } from '../store/actions'
-import {getAsyncGroup, getAsyncNotes} from '../store/asyncActions'
+import {
+  getAsyncGroup,
+  getAsyncNotes,
+  createAsyncGroup
+} from '../store/asyncActions'
 import {Button, Col} from 'react-bootstrap'
 import Avatar from './Avatar'
 
@@ -15,19 +19,21 @@ const SideBar = () => {
   const [groupVal, setGroupVal] = useState('')
 
   const dispatch = useDispatch()
-  const {groups, selectedGroup} = useSelector(state => state)
+  const {groups, selectedGroup, user} = useSelector(state => state)
 
   useEffect(() => {
-    dispatch(getAsyncGroup())
-    dispatch(getAsyncNotes())
-  }, [])
+    if(user.isLogin){
+      dispatch(getAsyncGroup())
+      dispatch(getAsyncNotes())
+    }
+  }, [user])
 
   const isDisabled = !groupVal.length
 
   const addNewGroup = () => {
     setShowAddGroupForm(false)
     setGroupVal('')
-    dispatch(createGroup(groupVal))
+    dispatch(createAsyncGroup(groupVal))
   }
 
   return (
