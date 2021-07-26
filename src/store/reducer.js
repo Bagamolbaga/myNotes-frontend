@@ -10,7 +10,9 @@ import {
     SELECT_NOTE,
     EDIT_SELECT_NOTE,
     SHOW_EDIT_NOTE_FORM,
-    SET_USER
+    SET_USER,
+    LOGOUT,
+    SET_EROR
   } from './actions'
   
   
@@ -20,6 +22,7 @@ import {
     selectedGroup: 'All',
     showCeateNoteForm: false,
     showEditNoteForm: false,
+    authError: '',
     user: {
       id: 5,
       name: 'Baga',
@@ -129,11 +132,25 @@ import {
         return {
           ...state,
           user: {
-            id: 5,
-            name: 'Baga',
+            id: action.payload.id,
+            name: action.payload.name,
             avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
             isLogin: true
           }
+        }
+
+      case LOGOUT:
+        return {
+          ...state,
+          user: {
+            isLogin: false
+          }
+        }
+
+      case SET_EROR:
+        return {
+          ...state,
+          authError: action.payload
         }
     
       default:

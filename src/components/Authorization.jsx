@@ -1,23 +1,39 @@
 import {useState} from 'react'
 import {Row} from 'react-bootstrap'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {registration, login} from '../store/asyncActions'
 
 const Authorization = () => {
   const dispatch = useDispatch()
+  const {authError} = useSelector(state => state)
   const [isLogin, setIsLogin] = useState(true)
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
 
   return (
     isLogin ? (
       <Row className='authorization__container'>
         <h2 className="authorization__container-title">Authorization</h2>
         <label className="authorization__container-label" for="login">Login</label>
-        <input className="authorization__container-input" type="text" id="login" />
+        <input
+          className="authorization__container-input"
+          type="text"
+          id="login"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <label className="authorization__container-label" for="password">Password</label>
-        <input className="authorization__container-input" type="password" id="password" />
+        <input
+          className="authorization__container-input"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="authorization__container-label-error" for="password">{authError}</p>
         <button
           className="authorization__container-btn"
-          onClick={() => dispatch(login('Baga', '$2b$05$3dTyZ5uBY87TRdXMW5KPw.jxmciudi8ghlHE1ry9udfEWiNjpkpsu'))}
+          onClick={() => dispatch(login(name, password))}
         >
           Login
         </button>
@@ -29,12 +45,25 @@ const Authorization = () => {
       <Row className='authorization__container'>
         <h2 className="authorization__container-title">Authorization</h2>
         <label className="authorization__container-label" for="login">Login</label>
-        <input className="authorization__container-input" type="text" id="login" />
+        <input
+          className="authorization__container-input"
+          type="text"
+          id="login"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <label className="authorization__container-label" for="password">Password</label>
-        <input className="authorization__container-input" type="password" id="password" />
+        <input
+          className="authorization__container-input"
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="authorization__container-label-error" for="password">{authError}</p>
         <button
           className="authorization__container-btn"
-          onClick={() => dispatch(registration('lolka4', 'lolkapass'))}
+          onClick={() => dispatch(registration(name, password))}
         >
           Registration
         </button>

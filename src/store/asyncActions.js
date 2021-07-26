@@ -1,12 +1,15 @@
-import axios from 'axios'
+import {API} from '../axios'
 import {
     createGroup,
     createNote,
     getGroups,
     getNotes,
     editNote,
-    setUser
+    setUser,
+    logoutAction,
+    setAuthError
 } from '../store/actions'
+import jwtDecode from 'jwt-decode'
 
 export const ASYNC_CREATE_NOTE = 'ASYNC_CREATE_NOTE'
 
@@ -14,7 +17,7 @@ export const ASYNC_CREATE_NOTE = 'ASYNC_CREATE_NOTE'
 export const createAsyncNote = (data) => {
     return async (dispatch, getState) => {
         let {user, selectedGroup} = getState()
-        let res = await axios.post(`api/note`,{
+        let res = await API.post(`api/note`,{
             title: data.title,
             text: data.text,
             user_id: user.id,
@@ -30,7 +33,7 @@ export const createAsyncNote = (data) => {
 export const createAsyncGroup = (title) => {
     return async (dispatch, getState) => {
         let {user} = getState()
-        let res = await axios.post(`api/group`,{
+        let res = await API.post(`api/group`,{
             title: title,
             user_id: user.id
         })
@@ -44,7 +47,7 @@ export const createAsyncGroup = (title) => {
 export const getAsyncGroup = () => {
     return async (dispatch, getState) => {
         let {user} = getState()
-        let res = await axios.get(`api/group`,{
+        let res = await API.get(`api/group`,{
             params: {user_id: user.id}
         })
         if(res.status === 200) {
@@ -57,7 +60,7 @@ export const getAsyncGroup = () => {
 export const getAsyncNotes = () => {
     return async (dispatch, getState) => {
         let {user} = getState()
-        let res = await axios.get(`api/note`,{
+        let res = await API.get(`api/note`,{
             params: {user_id: user.id}
         })
         if(res.status === 200) {
@@ -70,7 +73,7 @@ export const getAsyncNotes = () => {
 export const editAsyncNotes = (data) => {
     return async (dispatch, getState) => {
         let {selectNoteId} = getState()
-        let res = await axios.put(`api/note`, {
+        let res = await API.put(`api/note`, {
             note_id: selectNoteId,
             newTitle: data.title,
             newText: data.text
@@ -84,26 +87,60 @@ export const editAsyncNotes = (data) => {
 
 export const registration = (name, password) => {
     return async (dispatch, getState) => {
-        let res = await axios.post(`api/user/registration`,{
+        let res = await API.post(`api/user/registration`,{
             name,
             password
         })
-        if(res.status === 200) {
-            dispatch(setUser(res.data))
+        if(!res.data.token) {
+            return dispatch(setAuthError(res.data.message))
         }
-        console.log(res)
+
+        if(res.data.token) {
+            localStorage.setItem('my-notes-token', res.data.token)
+            dispatch(setUser(jwtDecode(res.data.token)))
+            dispatch(setAuthError(''))
+            console.log(jwtDecode(res.data.token))
+        }
     }
 }
 
 export const login = (name, password) => {
     return async (dispatch, getState) => {
-        let res = await axios.post(`api/user/login`,{
+        let res = await API.post(`api/user/login`,{
             name,
             password
         })
-        if(res.status === 200) {
-            dispatch(setUser(res.data))
+        if(!res.data.token) {
+            return dispatch(setAuthError(res.data.message))
         }
-        console.log(res)
+
+        if(res.data.token) {
+            localStorage.setItem('my-notes-token', res.data.token)
+            dispatch(setUser(jwtDecode(res.data.token)))
+            dispatch(setAuthError(''))
+            console.log(jwtDecode(res.data.token))
+        }
+    }
+}
+
+export const authCheck = () => {
+    return async dispatch => {
+        let res = await API.get(`api/user/auth`)
+        if(!res.data.token) {
+            return
+        }
+
+        if(res.data.token) {
+            localStorage.setItem('my-notes-token', res.data.token)
+            dispatch(setUser(jwtDecode(res.data.token)))
+            console.log(jwtDecode(res.data.token))
+        }
+    }
+}
+
+export const logout = () => {
+    return dispatch => {
+        localStorage.setItem('my-notes-token', null)
+        dispatch(logoutAction())
     }
 }

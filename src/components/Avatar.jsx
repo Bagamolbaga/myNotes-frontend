@@ -1,8 +1,12 @@
+import {useState} from 'react'
 import {Row} from 'react-bootstrap'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {logout} from '../store/asyncActions'
 
 const Avatar = () => {
+  const dispatch = useDispatch()
   const {user} = useSelector(state => state)
+  const [showLogout, setShowLogout] = useState(false)
 
   return (
     user.isLogin ? 
@@ -11,7 +15,13 @@ const Avatar = () => {
         <div className='sideBar__img_container'>
           <img src={user.avatar} alt="avatar" />
         </div>
-        <h2>{user.name}</h2>
+        <h2 onClick={() => setShowLogout(!showLogout)}>{user.name}</h2>
+        <button
+          className={"logout " + (showLogout? 'hidden' : '')}
+          onClick={() => dispatch(logout())}
+        >
+          Logout
+        </button>
       </Row>
     ) 
       : 

@@ -9,7 +9,8 @@ import {
 import {
   getAsyncGroup,
   getAsyncNotes,
-  createAsyncGroup
+  createAsyncGroup,
+  authCheck
 } from '../store/asyncActions'
 import {Button, Col} from 'react-bootstrap'
 import Avatar from './Avatar'
@@ -20,6 +21,10 @@ const SideBar = () => {
 
   const dispatch = useDispatch()
   const {groups, selectedGroup, user} = useSelector(state => state)
+
+  useEffect(() => {
+    dispatch(authCheck())
+  }, [])
 
   useEffect(() => {
     if(user.isLogin){

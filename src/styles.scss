@@ -13,6 +13,10 @@
     height: 100vh;
     display: flex;
   }
+
+  .hidden {
+    display: none;
+  }
   
   .sideBar {
     &__container {
@@ -22,7 +26,7 @@
       //align-items: center;
     }
     &__avatar_container {
-      height: 250px;
+      height: 280px;
       width: 100%;
       margin-bottom: 40px;
       background-color: #644CC3;
@@ -39,6 +43,16 @@
         line-height: 16px;
         color: white;
         margin: 15px 0;
+        cursor: pointer;
+      }
+      .logout {
+        border: 2px solid #644CC3;
+        background-color: #A856F7;
+        outline: none;
+        color: white;
+        &:hover {
+          background-color: #644CC3;
+        }
       }
     }
     &__img_container {
@@ -269,6 +283,11 @@
       margin-right: 10px;
       font-size: 20px;
       margin: 20px 0 10px 0;
+      &-error {
+        margin: 10px;
+        color: #fa3029;
+        font-size: 18px;
+      }
     }
     &-input {
       width: 300px;
@@ -281,7 +300,8 @@
     &-btn {
       width: 300px;
       height: 40px;
-      margin-top: 60px;
+      margin-top: 20px;
+      margin-bottom: 10px;
       color: white;
       font-size: 20px;
       border-radius: 5px;
@@ -296,6 +316,9 @@
     &-span {
       color: #644CC3;
       cursor: pointer;
+      &:hover {
+        color: #A856F7;
+      }
     }
   }
   

@@ -10,6 +10,8 @@ export const SELECT_NOTE = 'SELECT_NOTE'
 export const EDIT_SELECT_NOTE = 'EDIT_SELECT_NOTE'
 export const SHOW_EDIT_NOTE_FORM = 'SHOW_EDIT_NOTE_FORM'
 export const SET_USER = 'SET_USER'
+export const LOGOUT = 'LOGOUT'
+export const SET_EROR = 'SET_EROR'
 
 
 
@@ -94,6 +96,19 @@ export const editNote = (value) => {
 export const setUser = (value) => {
   return {
     type: SET_USER,
+    payload: value
+  }
+}
+
+export const logoutAction = (value) => {
+  return {
+    type: LOGOUT
+  }
+}
+
+export const setAuthError = (value) => {
+  return {
+    type: SET_EROR,
     payload: value
   }
 }
