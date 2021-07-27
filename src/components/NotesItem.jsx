@@ -1,7 +1,7 @@
 import {selectNote} from '../store/actions'
 import {useDispatch} from 'react-redux'
 import MarkdownPreview from '@uiw/react-markdown-preview'
-
+import './styles/NotesItem.scss'
 
 const NotesItem = ({data}) => {
   const dispatch = useDispatch()

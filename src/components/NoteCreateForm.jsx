@@ -1,9 +1,10 @@
 import MarkdownEditor from '@uiw/react-markdown-editor'
 import {Button} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
-import {createNote} from '../store/actions'
 import {createAsyncNote} from '../store/asyncActions'
 import {useState} from 'react'
+import './styles/NoteCreateForm.scss'
+
 
 const NoteCreateForm = () => {
   const dispatch = useDispatch()

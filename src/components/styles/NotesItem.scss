@@ -1,0 +1,23 @@
+@import 'constants';
+
+.notesItem__container {
+    width: 250px;
+    height: 300px;
+    margin: 10px 5px;
+    border-radius: 10px;
+    border: 2px solid $secondaryColor;
+    overflow: hidden;
+    transition: .1s all;
+    &:hover {
+      border-color: $activeColor;
+      cursor: pointer;
+    }
+    &-title {
+      text-align: center;
+      border-bottom: 2px solid $secondaryColor;
+    }
+    &-MD_container {
+      padding: 0 10px;
+      text-overflow: ellipsis;
+    }
+  }

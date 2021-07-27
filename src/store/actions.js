@@ -12,6 +12,7 @@ export const SHOW_EDIT_NOTE_FORM = 'SHOW_EDIT_NOTE_FORM'
 export const SET_USER = 'SET_USER'
 export const LOGOUT = 'LOGOUT'
 export const SET_EROR = 'SET_EROR'
+export const GO_BACK = 'GO_BACK'
 
 
 
@@ -110,5 +111,11 @@ export const setAuthError = (value) => {
   return {
     type: SET_EROR,
     payload: value
+  }
+}
+
+export const goBack = () => {
+  return {
+    type: GO_BACK
   }
 }

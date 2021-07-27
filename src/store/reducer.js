@@ -12,7 +12,8 @@ import {
     SHOW_EDIT_NOTE_FORM,
     SET_USER,
     LOGOUT,
-    SET_EROR
+    SET_EROR,
+    GO_BACK
   } from './actions'
   
   
@@ -42,13 +43,6 @@ import {
         }
 
       case CREATE_NOTE:
-        // let newNotes = [...state.notes]
-        // let newNote = {
-        //   id: +state.notes.length + 1,
-        //   group: state.selectedGroup,
-        //   title: action.payload.title,
-        //   text: action.payload.text
-        // }
         return {
           ...state,
           showCeateNoteForm: false,
@@ -62,11 +56,6 @@ import {
         }
   
       case CREATE_GROUP:
-        // let newGroups = [...state.groups]
-        // let newGroup = {
-        //   id: +state.groups.length + 1,
-        //   title: action.payload
-        // }
         return {
           ...state,
           groups: [...state.groups, action.payload]
@@ -77,7 +66,8 @@ import {
           ...state,
           selectNoteId: false,
           selectedGroup: 'All',
-          showCeateNoteForm: false
+          showCeateNoteForm: false,
+          showEditNoteForm: false
         }
   
       case SHOW_CREATE_NOTE_FORM:
@@ -151,6 +141,15 @@ import {
         return {
           ...state,
           authError: action.payload
+        }
+
+      case GO_BACK:
+        return {
+          ...state,
+          selectNoteId: false,
+          selectedGroup: 'All',
+          showCeateNoteForm: false,
+          showEditNoteForm: false
         }
     
       default:

@@ -1,14 +1,13 @@
 import MarkdownEditor from '@uiw/react-markdown-editor'
 import {Button} from 'react-bootstrap'
-import {useDispatch, useSelector} from 'react-redux'
-import {editNote} from '../store/actions'
+import {useDispatch} from 'react-redux'
 import {editAsyncNotes} from '../store/asyncActions'
 import {useState} from 'react'
+import './styles/NoteCreateForm.scss'
+
 
 const NoteEditForm = ({note}) => {
   const dispatch = useDispatch()
-  //const {notes, selectNoteId} = useSelector(state => state)
-  //const selectNote = notes.filter(note => note.id === selectNoteId)[0]
 
   const [title, setTitle] = useState(note.title) || ''
   const [md, setMd] = useState(note.text) || ''

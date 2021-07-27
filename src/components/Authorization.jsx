@@ -2,6 +2,7 @@ import {useState} from 'react'
 import {Row} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {registration, login} from '../store/asyncActions'
+import './styles/Authorization.scss'
 
 const Authorization = () => {
   const dispatch = useDispatch()

@@ -1,4 +1,4 @@
-import {Col, Row, Button} from 'react-bootstrap'
+import {Col} from 'react-bootstrap'
 import ContentHeader from './ContentHeader'
 import NotesList from './NotesList'
 

@@ -1,11 +1,12 @@
 import MarkdownPreview from '@uiw/react-markdown-preview'
-import { useState } from 'react'
+import {faPen} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {useSelector, useDispatch} from 'react-redux'
 import {showEditForm} from '../store/actions'
 import NoteEditForm from './NoteEditForm'
+import './styles/NotesItemSelect.scss'
 
 const NotesItemSelect = () => {
-  // const [isEdit, setIsEdit] = useState(false)
   const dispatch = useDispatch()
   const {selectNoteId, notes, showEditNoteForm} = useSelector(state => state)
   const note = notes.filter(note => note.id === selectNoteId)[0]
@@ -19,7 +20,7 @@ const NotesItemSelect = () => {
               className="notesItemSelect__container-title_btn-edit"
               onClick={() => dispatch(showEditForm())}
               >
-                Edit
+                <FontAwesomeIcon icon={faPen}/>
             </button>
           </div>
           <div className="notesItemSelect__container-md-container">
