@@ -13,6 +13,7 @@ export const SET_USER = 'SET_USER'
 export const LOGOUT = 'LOGOUT'
 export const SET_EROR = 'SET_EROR'
 export const GO_BACK = 'GO_BACK'
+export const DELETE_NOTE = 'DELETE_NOTE'
 
 export const createNote = (value) => ({
   type: CREATE_NOTE,
@@ -64,6 +65,11 @@ export const selectNote = (id) => ({
 export const editNote = (value) => ({
   type: EDIT_SELECT_NOTE,
   payload: value,
+})
+
+export const deleteNote = (id) => ({
+  type: DELETE_NOTE,
+  payload: id,
 })
 
 export const setUser = (value) => ({

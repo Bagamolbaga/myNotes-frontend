@@ -1,3 +1,4 @@
+/* eslint-disable arrow-parens */
 /* eslint-disable no-case-declarations */
 /* eslint-disable import/prefer-default-export */
 import {
@@ -16,6 +17,7 @@ import {
   LOGOUT,
   SET_EROR,
   GO_BACK,
+  DELETE_NOTE,
 } from './actions'
 
 const initialState = {
@@ -106,6 +108,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         notes: [...notes],
         showEditNoteForm: false,
+      }
+    case DELETE_NOTE:
+      const nots = state.notes.filter((note) => note.id !== action.payload)
+      return {
+        ...state,
+        notes: [...nots],
       }
     case SET_USER:
       return {
