@@ -1,20 +1,19 @@
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react'
 import { Container } from 'react-bootstrap'
+import { Provider } from 'react-redux'
 import SideBar from './components/SideBar'
 import MainContentWraper from './components/MainContentWraper'
-
-import {Provider} from 'react-redux'
-import {store} from './store/store'
-
-//import 'bootstrap/dist/css/bootstrap.min.css'
-import "./styles.scss";
+import { store } from './store/store'
+import './styles.scss'
 
 export default function App() {
   return (
     <Provider store={store}>
-      <Container className='container'>
+      <Container className="container">
         <SideBar />
         <MainContentWraper />
       </Container>
     </Provider>
-  );
+  )
 }

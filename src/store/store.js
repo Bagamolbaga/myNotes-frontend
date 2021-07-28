@@ -1,6 +1,7 @@
-import {createStore, applyMiddleware} from 'redux'
-import {composeWithDevTools} from 'redux-devtools-extension'
+/* eslint-disable import/prefer-default-export */
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import {reducer} from './reducer'
+import { reducer } from './reducer'
 
-export let store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+export const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
