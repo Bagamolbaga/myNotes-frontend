@@ -10,6 +10,7 @@ import {
   setUser,
   logoutAction,
   setAuthError,
+  deleteNote,
 } from './actions'
 
 export const ASYNC_CREATE_NOTE = 'ASYNC_CREATE_NOTE'
@@ -73,6 +74,15 @@ export const editAsyncNotes = (data) => async (dispatch, getState) => {
     dispatch(editNote({ title: data.title, text: data.text }))
   }
   console.log(res.data)
+}
+
+export const asyncDeleteNote = (id) => async (dispatch) => {
+  const res = await API.delete('api/note', {
+    params: { note_id: id },
+  })
+  if (res.data) {
+    dispatch(deleteNote(id))
+  }
 }
 
 export const registration = (name, password) => async (dispatch) => {
