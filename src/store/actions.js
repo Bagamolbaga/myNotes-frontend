@@ -14,108 +14,72 @@ export const LOGOUT = 'LOGOUT'
 export const SET_EROR = 'SET_EROR'
 export const GO_BACK = 'GO_BACK'
 
+export const createNote = (value) => ({
+  type: CREATE_NOTE,
+  payload: value,
+})
 
+export const getGroups = (value) => ({
+  type: GET_GROUP,
+  payload: value,
+})
 
+export const getNotes = (value) => ({
+  type: GET_NOTES,
+  payload: value,
+})
 
+export const createGroup = (value) => ({
+  type: CREATE_GROUP,
+  payload: value,
+})
 
+export const showAllNote = () => ({
+  type: SHOW_ALL_NOTES,
+})
 
+export const showCreateNoteForm = () => ({
+  type: SHOW_CREATE_NOTE_FORM,
+})
 
-export const createNote = (value) => {
-  return {
-    type: CREATE_NOTE,
-    payload: value
-  }
-}
+export const showEditForm = () => ({
+  type: SHOW_EDIT_NOTE_FORM,
+})
 
-export const getGroups = (value) => {
-  return {
-    type: GET_GROUP,
-    payload: value
-  }
-}
+export const selectActiveGroup = (value) => ({
+  type: SELECT_ACTIVE_GROUP,
+  payload: value,
+})
 
-export const getNotes = (value) => {
-  return {
-    type: GET_NOTES,
-    payload: value
-  }
-}
+export const showActiveGroup = (value) => ({
+  type: SHOW_ACTIVE_GROUP,
+  payload: value,
+})
 
-export const createGroup = (value) => {
-  return {
-    type: CREATE_GROUP,
-    payload: value
-  }
-}
+export const selectNote = (id) => ({
+  type: SELECT_NOTE,
+  payload: id,
+})
 
-export const showAllNote = () => {
-  return {
-    type: SHOW_ALL_NOTES
-  }
-}
+export const editNote = (value) => ({
+  type: EDIT_SELECT_NOTE,
+  payload: value,
+})
 
-export const showCreateNoteForm = () => {
-  return {
-    type: SHOW_CREATE_NOTE_FORM
-  }
-}
+export const setUser = (value) => ({
+  type: SET_USER,
+  payload: value,
+})
 
-export const showEditForm = () => {
-  return {
-    type: SHOW_EDIT_NOTE_FORM
-  }
-}
+export const logoutAction = () => ({
+  type: LOGOUT,
+})
 
-export const selectActiveGroup = (value) => {
-  return {
-    type: SELECT_ACTIVE_GROUP,
-    payload: value
-  }
-}
+export const setAuthError = (value) => ({
+  type: SET_EROR,
+  payload: value,
+})
 
-export const showActiveGroup = (value) => {
-  return {
-    type: SHOW_ACTIVE_GROUP,
-    payload: value
-  }
-}
-
-export const selectNote = (id) => {
-  return {
-    type: SELECT_NOTE,
-    payload: id
-  }
-}
-
-export const editNote = (value) => {
-  return {
-    type: EDIT_SELECT_NOTE,
-    payload: value
-  }
-}
-
-export const setUser = (value) => {
-  return {
-    type: SET_USER,
-    payload: value
-  }
-}
-
-export const logoutAction = (value) => {
-  return {
-    type: LOGOUT
-  }
-}
-
-export const setAuthError = (value) => {
-  return {
-    type: SET_EROR,
-    payload: value
-  }
-}
-
-export const goBack = () => {
-  return {
-    type: GO_BACK
-  }
-}
+export const goBack = () => ({
+  type: GO_BACK,
+})
