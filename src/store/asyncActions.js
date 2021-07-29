@@ -26,7 +26,6 @@ export const createAsyncNote = (data) => async (dispatch, getState) => {
   if (res.status === 200) {
     dispatch(createNote(res.data))
   }
-  console.log(res)
 }
 
 export const createAsyncGroup = (title) => async (dispatch, getState) => {
@@ -38,7 +37,6 @@ export const createAsyncGroup = (title) => async (dispatch, getState) => {
   if (res.status === 200) {
     dispatch(createGroup(res.data))
   }
-  console.log(res)
 }
 
 export const getAsyncGroup = () => async (dispatch, getState) => {
@@ -49,7 +47,6 @@ export const getAsyncGroup = () => async (dispatch, getState) => {
   if (res.status === 200) {
     dispatch(getGroups(res.data))
   }
-  // console.log(res)
 }
 
 export const getAsyncNotes = () => async (dispatch, getState) => {
@@ -60,7 +57,6 @@ export const getAsyncNotes = () => async (dispatch, getState) => {
   if (res.status === 200) {
     dispatch(getNotes(res.data))
   }
-  // console.log(res)
 }
 
 export const editAsyncNotes = (data) => async (dispatch, getState) => {
@@ -73,7 +69,6 @@ export const editAsyncNotes = (data) => async (dispatch, getState) => {
   if (res.status === 200) {
     dispatch(editNote({ title: data.title, text: data.text }))
   }
-  console.log(res.data)
 }
 
 export const asyncDeleteNote = (id) => async (dispatch) => {
@@ -98,7 +93,6 @@ export const registration = (name, password) => async (dispatch) => {
     localStorage.setItem('my-notes-token', res.data.token)
     dispatch(setUser(jwtDecode(res.data.token)))
     dispatch(setAuthError(''))
-    console.log(jwtDecode(res.data.token))
   }
 }
 
@@ -115,7 +109,6 @@ export const login = (name, password) => async (dispatch) => {
     localStorage.setItem('my-notes-token', res.data.token)
     dispatch(setUser(jwtDecode(res.data.token)))
     dispatch(setAuthError(''))
-    console.log(jwtDecode(res.data.token))
   }
 }
 
@@ -128,7 +121,6 @@ export const authCheck = () => async (dispatch) => {
   if (res.data.token) {
     localStorage.setItem('my-notes-token', res.data.token)
     dispatch(setUser(jwtDecode(res.data.token)))
-    console.log(jwtDecode(res.data.token))
   }
 }
 
