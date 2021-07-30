@@ -3,7 +3,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL_URL,
+  baseURL: process.env.VERCEL_ENV === 'production' ? 'https://baga-my-notes-server-v2.herokuapp.com' : process.env.REACT_APP_API_URL_URL,
 })
 
 const interceptor = (config) => {
