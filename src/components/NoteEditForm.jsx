@@ -33,7 +33,6 @@ const NoteEditForm = ({ note }) => {
       <div className="noteCreateForm__container-btn_save-container">
         <Button
           disabled={!isDisableBtnSave}
-          // onClick={() => dispatch(editNote({title: title, text: md}))}
           onClick={() => dispatch(editAsyncNotes({ title, text: md }))}
           className="noteCreateForm__container-btn_save"
         >

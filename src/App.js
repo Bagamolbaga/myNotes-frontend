@@ -10,7 +10,7 @@ import './styles.scss'
 export default function App() {
   return (
     <Provider store={store}>
-      <Container className="container">
+      <Container className="container App">
         <SideBar />
         <MainContentWraper />
       </Container>

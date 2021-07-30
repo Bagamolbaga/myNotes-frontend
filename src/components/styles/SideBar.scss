@@ -17,7 +17,6 @@
       justify-content: flex-end;
       text-align: center;
       h2 {
-        font-family: Arial, sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 16px;
@@ -52,14 +51,17 @@
       margin-top: 20px;
       background-color: $primaryColor;
       border: none;
-      font-family: Arial, sans-serif;
       font-style: normal;
       font-weight: bold;
       font-size: 20px;
       line-height: 23px;
       transition: .1s all;
+      color: white;
       &-all {
         margin-bottom: 60px;
+        &-cheked {
+          background-color: $activeColor;
+        }
       }
       &:hover {
         background-color: $secondaryColor;
@@ -75,6 +77,7 @@
         margin-top: 60px;
       }
       &-cheked {
+        height: 35px;
         margin-top: 10px;
         background-color: $activeColor;
         border-color: $darkenColor;
@@ -82,17 +85,19 @@
         font-weight: bold;
         font-size: 20px;
         line-height: 23px;
+        border: none;
+        color: white;
       }
       height: 35px;
       margin-top: 10px;
       background-color: $primaryColor;
       border: none;
-      font-family: Arial, sans-serif;
       font-style: normal;
       font-weight: bold;
       font-size: 20px;
       line-height: 23px;
       transition: .1s all;
+      color: white;
       &:hover {
         background-color: $secondaryColor;
       }

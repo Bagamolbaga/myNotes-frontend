@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import MarkdownEditor from '@uiw/react-markdown-editor'
 import { Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createAsyncNote } from '../store/asyncActions'
 import './styles/NoteCreateForm.scss'
 
 const NoteCreateForm = () => {
   const dispatch = useDispatch()
+  const { selectedGroup } = useSelector((state) => state)
+
   const [title, setTitle] = useState('')
   const [md, setMd] = useState('')
 
-  const isDisableBtnSave = title.length && md.length
+  const isDisableBtnSave = title.length && md.length && selectedGroup !== 'All'
 
   return (
     <div className="noteCreateForm__container">

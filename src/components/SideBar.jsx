@@ -50,10 +50,9 @@ const SideBar = () => {
         <FontAwesomeIcon icon={faPlus} />
         add Note
       </Button>
-      <Button className="sideBar__btn_notes sideBar__btn_notes-all" onClick={() => dispatch(showAllNote())}>My Notes</Button>
-      <Button onClick={() => dispatch(showAllNote())} className={selectedGroup === 'All' ? 'sideBar__btn_group-cheked' : 'sideBar__btn_group'}>All</Button>
+      <button type="button" className={`sideBar__btn_notes sideBar__btn_notes-all ${selectedGroup === 'All' && 'sideBar__btn_notes-all-cheked'}`} onClick={() => dispatch(showAllNote())}>My Notes</button>
       {
-        groups.map((g) => <Button onClick={() => dispatch(selectActiveGroup(g.id))} key={g.id} className={selectedGroup === g.title ? 'sideBar__btn_group-cheked' : 'sideBar__btn_group'}>{g.title}</Button>)
+        groups.map((g) => <button type="button" onClick={() => dispatch(selectActiveGroup(g.id))} key={g.id} className={selectedGroup === g.id ? 'sideBar__btn_group-cheked' : 'sideBar__btn_group'}>{g.title}</button>)
       }
       {
         showAddGroupForm
@@ -64,7 +63,7 @@ const SideBar = () => {
               <button type="button" onClick={() => setShowAddGroupForm(false)} className="sideBar__btn_group_add sideBar__btn_group_add-back">back</button>
             </>
           )
-          : <Button onClick={() => setShowAddGroupForm(true)} className="sideBar__btn_group">Add Group</Button>
+          : <button type="button" onClick={() => setShowAddGroupForm(true)} className="sideBar__btn_group">Add Group</button>
       }
 
     </Col>
