@@ -11,9 +11,9 @@ const ContentHeader = () => {
       <p className="contentHeader__container-stats">
         All notes |
         {allNotes}
-        {process.env.VERCEL_ENV === 'production' && 'prod'}
-        {process.env.VERCEL_ENV === 'development' && 'de'}
-        {process.env.VERCEL_ENV === 'preview' && 'prod'}
+        {process.env.REACT_APP_VERCEL_ENV === 'production' && 'prod'}
+        {process.env.REACT_APP_VERCEL_ENV === 'development' && 'devel'}
+        {process.env.REACT_APP_VERCEL_ENV === 'preview' && 'prev'}
 
       </p>
     </Row>
