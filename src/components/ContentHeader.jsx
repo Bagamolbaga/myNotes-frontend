@@ -11,8 +11,6 @@ const ContentHeader = () => {
       <p className="contentHeader__container-stats">
         All notes |
         {allNotes}
-        {process.env.REACT_APP_API_URL_URL}
-
       </p>
     </Row>
   )
