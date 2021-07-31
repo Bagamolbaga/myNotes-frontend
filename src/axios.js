@@ -5,6 +5,7 @@ import axios from 'axios'
 const API = axios.create({
   baseURL: 'https://baga-my-notes-server-v2.herokuapp.com',
 })
+console.log(process.env)
 
 const interceptor = (config) => {
   config.headers.authorization = `Bearer ${localStorage.getItem('my-notes-token')}`
