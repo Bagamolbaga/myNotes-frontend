@@ -80,11 +80,13 @@ export const asyncDeleteNote = (id) => async (dispatch) => {
   }
 }
 
-export const registration = (name, password) => async (dispatch) => {
-  const res = await API.post('api/user/registration', {
-    name,
-    password,
-  })
+export const registration = (name, password, img) => async (dispatch) => {
+  const formData = new FormData()
+  formData.append('name', name)
+  formData.append('password', password)
+  formData.append('img', img)
+
+  const res = await API.post('api/user/registration', formData)
   if (!res.data.token) {
     return dispatch(setAuthError(res.data.message))
   }

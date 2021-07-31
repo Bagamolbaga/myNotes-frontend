@@ -121,7 +121,7 @@ export const reducer = (state = initialState, action) => {
         user: {
           id: action.payload.id,
           name: action.payload.name,
-          avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
+          avatar: `${process.env.REACT_APP_API_URL_URL}/${action.payload.avatar}`,
           isLogin: true,
         },
       }

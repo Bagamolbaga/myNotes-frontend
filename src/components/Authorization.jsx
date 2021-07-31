@@ -15,6 +15,20 @@ const Authorization = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
+  const [file, setFile] = useState(undefined)
+  const [fileUrl, setFileUrl] = useState(undefined)
+
+  const fileInputHandler = (e) => {
+    const f = (e.target.files[0])
+    const reader = new FileReader()
+
+    reader.onloadend = () => {
+      setFile(f)
+      setFileUrl(reader.result)
+    }
+    reader.readAsDataURL(f)
+  }
+
   return (
     isLogin ? (
       <Row className="authorization__container">
@@ -68,11 +82,23 @@ const Authorization = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <label className="authorization__container-label" htmlFor="password">Avatar</label>
+          <input
+            className="authorization__container-input"
+            type="file"
+            id="avatar"
+            onChange={fileInputHandler}
+          />
+          {fileUrl ? (
+            <div className="authorization__container-avatar">
+              <img src={fileUrl} alt="avatar-preview" />
+            </div>
+          ) : (<p>Please select an Image for Preview</p>)}
           <p className="authorization__container-label-error" htmlFor="password">{authError}</p>
           <button
             type="button"
             className="authorization__container-btn"
-            onClick={() => dispatch(registration(name, password))}
+            onClick={() => dispatch(registration(name, password, file))}
           >
             Registration
           </button>
