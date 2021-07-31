@@ -11,6 +11,7 @@ const ContentHeader = () => {
       <p className="contentHeader__container-stats">
         All notes |
         {allNotes}
+        {process.env.VERCEL_ENV}
       </p>
     </Row>
   )
