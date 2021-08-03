@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import MarkdownPreview from '@uiw/react-markdown-preview'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -10,9 +11,11 @@ import { asyncDeleteNote } from '../store/asyncActions'
 import './styles/NotesItem.scss'
 
 const NotesItem = ({ data }) => {
+  const history = useHistory()
   const dispatch = useDispatch()
 
   const selectHandler = (id) => {
+    history.push(`/note/${data.id}`)
     dispatch(selectNote(id))
   }
 

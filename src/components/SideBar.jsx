@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Col } from 'react-bootstrap'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -46,11 +47,15 @@ const SideBar = () => {
   return (
     <Col className="sideBar__container" md={3}>
       <Avatar />
-      <Button className="sideBar__btn_notes" onClick={() => dispatch(showCreateNoteForm())}>
-        <FontAwesomeIcon icon={faPlus} />
-        add Note
-      </Button>
-      <button type="button" className={`sideBar__btn_notes sideBar__btn_notes-all ${selectedGroup === 'All' && 'sideBar__btn_notes-all-cheked'}`} onClick={() => dispatch(showAllNote())}>My Notes</button>
+      <Link to="/note/create">
+        <Button className="sideBar__btn_notes" onClick={() => dispatch(showCreateNoteForm())}>
+          <FontAwesomeIcon icon={faPlus} />
+          add Note
+        </Button>
+      </Link>
+      <Link to="/">
+        <button type="button" className={`sideBar__btn_notes sideBar__btn_notes-all ${selectedGroup === 'All' && 'sideBar__btn_notes-all-cheked'}`} onClick={() => dispatch(showAllNote())}>My Notes</button>
+      </Link>
       {
         groups.map((g) => <button type="button" onClick={() => dispatch(selectActiveGroup(g.id))} key={g.id} className={selectedGroup === g.id ? 'sideBar__btn_group-cheked' : 'sideBar__btn_group'}>{g.title}</button>)
       }

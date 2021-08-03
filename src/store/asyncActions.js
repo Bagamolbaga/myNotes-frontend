@@ -117,7 +117,7 @@ export const login = (name, password) => async (dispatch) => {
 export const authCheck = () => async (dispatch) => {
   const res = await API.get('api/user/auth')
   if (!res.data.token) {
-    return
+    return false
   }
 
   if (res.data.token) {

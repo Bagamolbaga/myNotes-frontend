@@ -27,9 +27,6 @@ const initialState = {
   showEditNoteForm: false,
   authError: '',
   user: {
-    id: 5,
-    name: 'Baga',
-    avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
     isLogin: false,
   },
   groups: [],
