@@ -43,6 +43,7 @@ export const reducer = (state = initialState, action) => {
     case CREATE_NOTE:
       return {
         ...state,
+        selectNoteId: action.payload.id,
         showCeateNoteForm: false,
         notes: [...state.notes, action.payload],
       }

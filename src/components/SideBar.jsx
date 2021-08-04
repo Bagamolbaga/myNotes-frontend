@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Col } from 'react-bootstrap'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -19,6 +19,7 @@ import Avatar from './Avatar'
 import './styles/SideBar.scss'
 
 const SideBar = () => {
+  const history = useHistory()
   const [showAddGroupForm, setShowAddGroupForm] = useState(false)
   const [groupVal, setGroupVal] = useState('')
 
@@ -34,7 +35,7 @@ const SideBar = () => {
       dispatch(getAsyncGroup())
       dispatch(getAsyncNotes())
     }
-  }, [dispatch, user])
+  }, [dispatch, history, user])
 
   const isDisabled = !groupVal.length
 

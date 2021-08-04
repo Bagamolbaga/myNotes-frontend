@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+/* eslint-disable no-unused-expressions */
+import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import MarkdownEditor from '@uiw/react-markdown-editor'
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,11 +8,23 @@ import { createAsyncNote } from '../store/asyncActions'
 import './styles/NoteCreateForm.scss'
 
 const NoteCreateForm = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
-  const { selectedGroup } = useSelector((state) => state)
+  const { selectedGroup, selectNoteId, showCeateNoteForm } = useSelector((state) => state)
 
   const [title, setTitle] = useState('')
   const [md, setMd] = useState('')
+
+  useEffect(() => {
+    selectNoteId && !showCeateNoteForm && history.push(`/note/${selectNoteId}`)
+  }, [history, selectNoteId, showCeateNoteForm])
+
+  const createNotehandler = () => {
+    dispatch(createAsyncNote({
+      title,
+      text: md,
+    }))
+  }
 
   const isDisableBtnSave = title.length && md.length && selectedGroup !== 'All'
 
@@ -33,10 +47,7 @@ const NoteCreateForm = () => {
       <div className="noteCreateForm__container-btn_save-container">
         <Button
           disabled={!isDisableBtnSave}
-          onClick={() => dispatch(createAsyncNote({
-            title,
-            text: md,
-          }))}
+          onClick={createNotehandler}
           className="noteCreateForm__container-btn_save"
         >
           SAVE

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
@@ -18,11 +19,11 @@ const NotesItemSelect = () => {
   const note = notes.filter((item) => item.id === Number(noteId))[0]
 
   useEffect(() => {
-    if (notes.length === 0) {
-      dispatch(authCheck())
-      dispatch(getAsyncGroup())
-      dispatch(getAsyncNotes())
-    }
+    // if (notes.length === 0) {
+    //   dispatch(authCheck())
+    //   dispatch(getAsyncGroup())
+    //   dispatch(getAsyncNotes())
+    // }
   }, [])
 
   return (
