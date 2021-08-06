@@ -71,6 +71,26 @@ export const editAsyncNotes = (data) => async (dispatch, getState) => {
   }
 }
 
+export const fixedNote = (id) => async (dispatch) => {
+  const res = await API.put('api/note', {
+    note_id: id,
+    toFixed: true,
+  })
+  if (res.status === 200) {
+    dispatch(editNote({ toFixed: true, id }))
+  }
+}
+
+export const unFixedNote = (id) => async (dispatch) => {
+  const res = await API.put('api/note', {
+    note_id: id,
+    toUnFixed: true,
+  })
+  if (res.status === 200) {
+    dispatch(editNote({ toUnFixed: true, id }))
+  }
+}
+
 export const asyncDeleteNote = (id) => async (dispatch) => {
   const res = await API.delete('api/note', {
     params: { note_id: id },

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
@@ -9,27 +10,25 @@ import { authCheck, getAsyncGroup, getAsyncNotes } from '../store/asyncActions'
 import NotesItem from './NotesItem'
 import './styles/NotesList.scss'
 
-const NotesList = ({ search }) => {
+const NotesList = ({ search, isFixedList }) => {
   const dispatch = useDispatch()
   const { notes, selectedGroup } = useSelector((state) => state)
   const query = new URLSearchParams(useLocation().search)
 
-  useEffect(() => {
-    // if (notes.length === 0) {
-    //   dispatch(authCheck())
-    //   dispatch(getAsyncGroup())
-    //   dispatch(getAsyncNotes())
-    // }
-  }, [])
-
   let filteredNotes
   if (search) {
     filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(query.get('term')) || note.text.toLowerCase().includes(query.get('term')))
+  } else if (isFixedList) {
+    filteredNotes = notes.filter((note) => note.fixed)
   } else {
     filteredNotes = notes.filter((item) => (selectedGroup !== 'All' && selectedGroup === item.group_id ? item : selectedGroup === 'All' ? item : null))
   }
 
-  return filteredNotes.map((note) => <NotesItem key={note.id} data={note} />)
+  return (
+    <div className="notesList__container">
+      { filteredNotes.map((note) => <NotesItem key={note.id} data={note} />) }
+    </div>
+  )
 }
 
 export default NotesList

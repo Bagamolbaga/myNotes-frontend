@@ -10,6 +10,7 @@ import NotesItemSelect from './NotesItemSelect'
 import NoteCreateForm from './NoteCreateForm'
 import Authorization from './Authorization'
 import NoteEditForm from './NoteEditForm'
+import FixedNotesListWraper from './FixedNotesListWraper'
 import './styles/NotesList.scss'
 
 const MainContentWraper = () => (
@@ -17,9 +18,10 @@ const MainContentWraper = () => (
     <ContentHeader />
     <Search />
     <BtnGoBack />
-    <div className="notesList__container">
+    <div className="notesList__main_container">
       <Switch>
         <Route exact path="/">
+          <FixedNotesListWraper />
           <NotesList />
         </Route>
         <Route path="/registration">

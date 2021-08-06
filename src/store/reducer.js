@@ -96,7 +96,15 @@ export const reducer = (state = initialState, action) => {
       const notes = [...state.notes]
       notes.map((note) => {
         const item = note
-        if (item.id === state.selectNoteId) {
+        if (action.payload.toFixed) {
+          if (item.id === action.payload.id) {
+            item.fixed = true
+          }
+        } else if (action.payload.toUnFixed) {
+          if (item.id === action.payload.id) {
+            item.fixed = false
+          }
+        } else if (item.id === state.selectNoteId) {
           item.title = action.payload.title
           item.text = action.payload.text
         }

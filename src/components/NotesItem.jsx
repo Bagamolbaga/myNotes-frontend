@@ -2,17 +2,18 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import MarkdownPreview from '@uiw/react-markdown-preview'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faLink } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { selectNote } from '../store/actions'
-import { asyncDeleteNote } from '../store/asyncActions'
+import { asyncDeleteNote, fixedNote, unFixedNote } from '../store/asyncActions'
 import './styles/NotesItem.scss'
 
 const NotesItem = ({ data }) => {
   const history = useHistory()
   const dispatch = useDispatch()
+  const { notes } = useSelector((state) => state)
 
   const selectHandler = (id) => {
     history.push(`/note/${data.id}`)
@@ -22,6 +23,17 @@ const NotesItem = ({ data }) => {
   const deleteHandler = (e, id) => {
     e.stopPropagation()
     dispatch(asyncDeleteNote(id))
+  }
+
+  const fixedHandler = (e, id) => {
+    e.stopPropagation()
+    const fixedNotesLength = notes.filter((note) => note.fixed).length
+
+    if (data.fixed) {
+      dispatch(unFixedNote(id))
+    } else if (fixedNotesLength < 3) {
+      dispatch(fixedNote(id))
+    }
   }
 
   return (
@@ -35,6 +47,14 @@ const NotesItem = ({ data }) => {
         </div>
       </div>
       <div className="notesItem__container__delete-container">
+        <button
+          type="button"
+          className={data.fixed ? 'notesItem__container__delete-btn' : 'notesItem__container__fixed-btn'}
+          data-node-type="btn-fix"
+          onClick={(e) => fixedHandler(e, data.id)}
+        >
+          <FontAwesomeIcon icon={faLink} />
+        </button>
         <button
           type="button"
           className="notesItem__container__delete-btn"

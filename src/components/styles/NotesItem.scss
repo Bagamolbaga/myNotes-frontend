@@ -47,4 +47,22 @@
         }
       }
     }
+    &__fixed-btn {
+      outline: none;
+      border: none;
+      width: 30px;
+      height: 30px;
+      margin: 0 3px 3px 0;
+      border: 1px solid green;
+      background-color: white;
+      border-radius: 7px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: green;
+      &:hover {
+        background-color: green;
+        color: white;
+      }
+    }
   }
