@@ -5,6 +5,9 @@
     min-height: 600px;
     border-radius: 10px;
     border: 2px solid $secondaryColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &-title {
       &-container {
         padding: 5px 30px;
@@ -30,5 +33,12 @@
     }
     &-md-container {
       padding: 10px 30px;
+    }
+    &_tags {
+      display: flex;
+      padding: 0 30px;
+      &-tag {
+        color: #2395ff;
+      }
     }
   }

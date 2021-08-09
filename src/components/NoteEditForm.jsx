@@ -17,11 +17,13 @@ const NoteEditForm = () => {
 
   const [title, setTitle] = useState(note.title) || ''
   const [md, setMd] = useState(note.text) || ''
+  const [tags, setTags] = useState(note.tags.join(' ')) || ''
 
-  const isDisableBtnSave = title.length && md.length
+  const isDisableBtnSave = title.length && md.length && tags.length
 
   const editHandler = () => {
-    dispatch(editAsyncNotes({ title, text: md }))
+    const tagsArray = tags.trim().split(' ')
+    dispatch(editAsyncNotes({ title, text: md, tags: tagsArray }))
     history.push(`/note/${noteId}`)
   }
 
@@ -41,6 +43,12 @@ const NoteEditForm = () => {
           onChange={(editor, data, value) => setMd(value)}
         />
       </div>
+      <input
+        className="noteCreateForm__container-title_input"
+        type="text"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+      />
       <div className="noteCreateForm__container-btn_save-container">
         <Button
           disabled={!isDisableBtnSave}
