@@ -103,12 +103,13 @@ export const asyncDeleteNote = (id) => async (dispatch) => {
 }
 
 export const registration = (name, password, img) => async (dispatch) => {
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('password', password)
-  formData.append('img', img)
-
-  const res = await API.post('api/user/registration', formData)
+  const resUpImg = API.UploadPhoto(img)
+  console.log(resUpImg)
+  const res = await API.post('api/user/registration', {
+    name,
+    password,
+    // img: resUpImg.image.url,
+  })
   if (!res.data.token) {
     return dispatch(setAuthError(res.data.message))
   }
