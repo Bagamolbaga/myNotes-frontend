@@ -1,3 +1,5 @@
+/* eslint-disable prefer-template */
+/* eslint-disable no-useless-concat */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react'
@@ -46,23 +48,32 @@ const NotesItem = ({ data }) => {
           <MarkdownPreview source={data.text} />
         </div>
       </div>
-      <div className="notesItem__container__delete-container">
-        <button
-          type="button"
-          className={data.fixed ? 'notesItem__container__delete-btn' : 'notesItem__container__fixed-btn'}
-          data-node-type="btn-fix"
-          onClick={(e) => fixedHandler(e, data.id)}
-        >
-          <FontAwesomeIcon icon={faLink} />
-        </button>
-        <button
-          type="button"
-          className="notesItem__container__delete-btn"
-          data-node-type="btn-del"
-          onClick={(e) => deleteHandler(e, data.id)}
-        >
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
+      <div>
+        <div className="notesItem__container_tags">
+          {data.tags.map((tag) => (
+            <p key={tag + data.title} className="notesItem__container_tags-tag">
+              {`#${tag}`}
+            </p>
+          ))}
+        </div>
+        <div className="notesItem__container__delete-container">
+          <button
+            type="button"
+            className={data.fixed ? 'notesItem__container__delete-btn' : 'notesItem__container__fixed-btn'}
+            data-node-type="btn-fix"
+            onClick={(e) => fixedHandler(e, data.id)}
+          >
+            <FontAwesomeIcon icon={faLink} />
+          </button>
+          <button
+            type="button"
+            className="notesItem__container__delete-btn"
+            data-node-type="btn-del"
+            onClick={(e) => deleteHandler(e, data.id)}
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </div>
       </div>
     </div>
   )

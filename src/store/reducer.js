@@ -107,6 +107,7 @@ export const reducer = (state = initialState, action) => {
         } else if (item.id === state.selectNoteId) {
           item.title = action.payload.title
           item.text = action.payload.text
+          item.tags = action.payload.tags
         }
         return note
       })

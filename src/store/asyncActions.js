@@ -20,6 +20,7 @@ export const createAsyncNote = (data) => async (dispatch, getState) => {
   const res = await API.post('api/note', {
     title: data.title,
     text: data.text,
+    tags: data.tags,
     user_id: user.id,
     group_id: selectedGroup,
   })
@@ -65,9 +66,10 @@ export const editAsyncNotes = (data) => async (dispatch, getState) => {
     note_id: selectNoteId,
     newTitle: data.title,
     newText: data.text,
+    newTags: data.tags,
   })
   if (res.status === 200) {
-    dispatch(editNote({ title: data.title, text: data.text }))
+    dispatch(editNote({ title: data.title, text: data.text, tags: data.tags }))
   }
 }
 

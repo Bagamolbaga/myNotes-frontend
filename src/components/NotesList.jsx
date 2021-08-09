@@ -17,7 +17,7 @@ const NotesList = ({ search, isFixedList }) => {
 
   let filteredNotes
   if (search) {
-    filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(query.get('term')) || note.text.toLowerCase().includes(query.get('term')))
+    filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(query.get('term')) || note.text.toLowerCase().includes(query.get('term')) || note.tags.join(' ').includes(query.get('term')))
   } else if (isFixedList) {
     filteredNotes = notes.filter((note) => note.fixed)
   } else {

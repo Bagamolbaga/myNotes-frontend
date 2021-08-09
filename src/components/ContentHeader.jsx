@@ -10,6 +10,7 @@ const ContentHeader = () => {
       <h1 className="contentHeader__container-title">My Notes</h1>
       <p className="contentHeader__container-stats">
         All notes |
+        {' '}
         {allNotes}
       </p>
     </Row>

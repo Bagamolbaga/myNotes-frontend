@@ -16,11 +16,11 @@ import './styles/NotesList.scss'
 const MainContentWraper = () => (
   <Col className="block-green">
     <ContentHeader />
-    <Search />
     <BtnGoBack />
     <div className="notesList__main_container">
       <Switch>
         <Route exact path="/">
+          <Search />
           <FixedNotesListWraper />
           <NotesList />
         </Route>
