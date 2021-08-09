@@ -15,7 +15,7 @@ const Authorization = ({ isReg }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { authError, user } = useSelector((state) => state)
-  // const [isLogin, setIsLogin] = useState(true)
+
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -35,6 +35,10 @@ const Authorization = ({ isReg }) => {
       setFileUrl(reader.result)
     }
     reader.readAsDataURL(f)
+  }
+
+  const registrationHandler = () => {
+    dispatch(registration(name, password, file))
   }
 
   return (
@@ -106,7 +110,7 @@ const Authorization = ({ isReg }) => {
           <button
             type="button"
             className="authorization__container-btn"
-            onClick={() => dispatch(registration(name, password, file))}
+            onClick={registrationHandler}
           >
             Registration
           </button>

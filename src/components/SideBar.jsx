@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Col } from 'react-bootstrap'
@@ -26,6 +26,8 @@ const SideBar = () => {
   const dispatch = useDispatch()
   const { groups, selectedGroup, user } = useSelector((state) => state)
 
+  const inputRef = createRef()
+
   useEffect(() => {
     dispatch(authCheck())
   }, [dispatch])
@@ -38,6 +40,10 @@ const SideBar = () => {
   }, [dispatch, history, user])
 
   const isDisabled = !groupVal.length
+
+  const showInputGroupForm = () => {
+    setShowAddGroupForm(true)
+  }
 
   const addNewGroup = () => {
     setShowAddGroupForm(false)
@@ -64,12 +70,12 @@ const SideBar = () => {
         showAddGroupForm
           ? (
             <>
-              <input value={groupVal} onChange={(e) => setGroupVal(e.target.value)} type="text" className="sideBar__input_add" />
+              <input ref={inputRef} value={groupVal} onChange={(e) => setGroupVal(e.target.value)} type="text" className="sideBar__input_add" />
               <button type="button" disabled={isDisabled} onClick={addNewGroup} className="sideBar__btn_group_add">ADD</button>
               <button type="button" onClick={() => setShowAddGroupForm(false)} className="sideBar__btn_group_add sideBar__btn_group_add-back">back</button>
             </>
           )
-          : <button type="button" onClick={() => setShowAddGroupForm(true)} className="sideBar__btn_group">Add Group</button>
+          : <button type="button" onClick={showInputGroupForm} className="sideBar__btn_group">Add Group</button>
       }
 
     </Col>
