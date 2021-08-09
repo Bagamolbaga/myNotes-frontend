@@ -36,10 +36,6 @@ const Authorization = ({ isReg }) => {
     reader.readAsDataURL(f)
   }
 
-  const registrationHandler = () => {
-    dispatch(registration(name, password, file))
-  }
-
   return (
     !isReg ? (
       <Row className="authorization__container">
@@ -109,7 +105,7 @@ const Authorization = ({ isReg }) => {
           <button
             type="button"
             className="authorization__container-btn"
-            onClick={registrationHandler}
+            onClick={() => dispatch(registration(name, password, file))}
           >
             Registration
           </button>
