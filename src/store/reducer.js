@@ -128,7 +128,7 @@ export const reducer = (state = initialState, action) => {
         user: {
           id: action.payload.id,
           name: action.payload.name,
-          avatar: `${process.env.REACT_APP_API_URL_URL}/${action.payload.avatar}`,
+          avatar: action.payload.avatar,
           isLogin: true,
         },
       }

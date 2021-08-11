@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { uploadPhoto } from '../firebase'
 import { registration, login } from '../store/asyncActions'
 import './styles/Authorization.scss'
 
@@ -34,6 +35,11 @@ const Authorization = ({ isReg }) => {
       setFileUrl(reader.result)
     }
     reader.readAsDataURL(f)
+  }
+
+  const registrHandler = async () => {
+    const url = await uploadPhoto(file)
+    dispatch(registration(name, password, url))
   }
 
   return (
@@ -105,7 +111,7 @@ const Authorization = ({ isReg }) => {
           <button
             type="button"
             className="authorization__container-btn"
-            onClick={() => dispatch(registration(name, password, file))}
+            onClick={registrHandler}
           >
             Registration
           </button>
