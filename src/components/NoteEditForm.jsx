@@ -1,18 +1,31 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
 import MarkdownEditor from '@uiw/react-markdown-editor'
 import { Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { editAsyncNotes } from '../store/asyncActions'
 import './styles/NoteCreateForm.scss'
 
-const NoteEditForm = ({ note }) => {
+const NoteEditForm = () => {
+  const history = useHistory()
+  const { noteId } = useParams()
   const dispatch = useDispatch()
+
+  const { notes } = useSelector((state) => state)
+  const note = notes.filter((item) => item.id === Number(noteId))[0]
 
   const [title, setTitle] = useState(note.title) || ''
   const [md, setMd] = useState(note.text) || ''
+  const [tags, setTags] = useState(note.tags.join(' ')) || ''
 
-  const isDisableBtnSave = title.length && md.length
+  const isDisableBtnSave = title.length && md.length && tags.length
+
+  const editHandler = () => {
+    const tagsArray = tags.trim().split(' ')
+    dispatch(editAsyncNotes({ title, text: md, tags: tagsArray }))
+    history.push(`/note/${noteId}`)
+  }
 
   return (
     <div className="noteCreateForm__container">
@@ -30,10 +43,16 @@ const NoteEditForm = ({ note }) => {
           onChange={(editor, data, value) => setMd(value)}
         />
       </div>
+      <input
+        className="noteCreateForm__container-title_input"
+        type="text"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+      />
       <div className="noteCreateForm__container-btn_save-container">
         <Button
           disabled={!isDisableBtnSave}
-          onClick={() => dispatch(editAsyncNotes({ title, text: md }))}
+          onClick={editHandler}
           className="noteCreateForm__container-btn_save"
         >
           EDIT

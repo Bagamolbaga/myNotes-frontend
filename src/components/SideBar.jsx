@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Col } from 'react-bootstrap'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -18,6 +19,7 @@ import Avatar from './Avatar'
 import './styles/SideBar.scss'
 
 const SideBar = () => {
+  const history = useHistory()
   const [showAddGroupForm, setShowAddGroupForm] = useState(false)
   const [groupVal, setGroupVal] = useState('')
 
@@ -33,7 +35,7 @@ const SideBar = () => {
       dispatch(getAsyncGroup())
       dispatch(getAsyncNotes())
     }
-  }, [dispatch, user])
+  }, [dispatch, history, user])
 
   const isDisabled = !groupVal.length
 
@@ -46,11 +48,15 @@ const SideBar = () => {
   return (
     <Col className="sideBar__container" md={3}>
       <Avatar />
-      <Button className="sideBar__btn_notes" onClick={() => dispatch(showCreateNoteForm())}>
-        <FontAwesomeIcon icon={faPlus} />
-        add Note
-      </Button>
-      <button type="button" className={`sideBar__btn_notes sideBar__btn_notes-all ${selectedGroup === 'All' && 'sideBar__btn_notes-all-cheked'}`} onClick={() => dispatch(showAllNote())}>My Notes</button>
+      <Link to="/note/create">
+        <Button className="sideBar__btn_notes" onClick={() => dispatch(showCreateNoteForm())}>
+          <FontAwesomeIcon icon={faPlus} />
+          add Note
+        </Button>
+      </Link>
+      <Link to="/">
+        <button type="button" className={`sideBar__btn_notes sideBar__btn_notes-all ${selectedGroup === 'All' && 'sideBar__btn_notes-all-cheked'}`} onClick={() => dispatch(showAllNote())}>My Notes</button>
+      </Link>
       {
         groups.map((g) => <button type="button" onClick={() => dispatch(selectActiveGroup(g.id))} key={g.id} className={selectedGroup === g.id ? 'sideBar__btn_group-cheked' : 'sideBar__btn_group'}>{g.title}</button>)
       }

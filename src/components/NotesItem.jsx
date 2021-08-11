@@ -1,24 +1,41 @@
+/* eslint-disable prefer-template */
+/* eslint-disable no-useless-concat */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import MarkdownPreview from '@uiw/react-markdown-preview'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faLink } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { selectNote } from '../store/actions'
-import { asyncDeleteNote } from '../store/asyncActions'
+import { asyncDeleteNote, fixedNote, unFixedNote } from '../store/asyncActions'
 import './styles/NotesItem.scss'
 
 const NotesItem = ({ data }) => {
+  const history = useHistory()
   const dispatch = useDispatch()
+  const { notes } = useSelector((state) => state)
 
   const selectHandler = (id) => {
+    history.push(`/note/${data.id}`)
     dispatch(selectNote(id))
   }
 
   const deleteHandler = (e, id) => {
     e.stopPropagation()
     dispatch(asyncDeleteNote(id))
+  }
+
+  const fixedHandler = (e, id) => {
+    e.stopPropagation()
+    const fixedNotesLength = notes.filter((note) => note.fixed).length
+
+    if (data.fixed) {
+      dispatch(unFixedNote(id))
+    } else if (fixedNotesLength < 3) {
+      dispatch(fixedNote(id))
+    }
   }
 
   return (
@@ -31,15 +48,32 @@ const NotesItem = ({ data }) => {
           <MarkdownPreview source={data.text} />
         </div>
       </div>
-      <div className="notesItem__container__delete-container">
-        <button
-          type="button"
-          className="notesItem__container__delete-btn"
-          data-node-type="btn-del"
-          onClick={(e) => deleteHandler(e, data.id)}
-        >
-          <FontAwesomeIcon icon={faTimes} />
-        </button>
+      <div>
+        <div className="notesItem__container_tags">
+          {data.tags.map((tag) => (
+            <p key={tag + data.title} className="notesItem__container_tags-tag">
+              {`#${tag}`}
+            </p>
+          ))}
+        </div>
+        <div className="notesItem__container__delete-container">
+          <button
+            type="button"
+            className={data.fixed ? 'notesItem__container__delete-btn' : 'notesItem__container__fixed-btn'}
+            data-node-type="btn-fix"
+            onClick={(e) => fixedHandler(e, data.id)}
+          >
+            <FontAwesomeIcon icon={faLink} />
+          </button>
+          <button
+            type="button"
+            className="notesItem__container__delete-btn"
+            data-node-type="btn-del"
+            onClick={(e) => deleteHandler(e, data.id)}
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </div>
       </div>
     </div>
   )

@@ -27,9 +27,6 @@ const initialState = {
   showEditNoteForm: false,
   authError: '',
   user: {
-    id: 5,
-    name: 'Baga',
-    avatar: 'https://c4.wallpaperflare.com/wallpaper/40/881/286/hoodie-anime-girl-wallpaper-preview.jpg',
     isLogin: false,
   },
   groups: [],
@@ -46,6 +43,7 @@ export const reducer = (state = initialState, action) => {
     case CREATE_NOTE:
       return {
         ...state,
+        selectNoteId: action.payload.id,
         showCeateNoteForm: false,
         notes: [...state.notes, action.payload],
       }
@@ -98,9 +96,18 @@ export const reducer = (state = initialState, action) => {
       const notes = [...state.notes]
       notes.map((note) => {
         const item = note
-        if (item.id === state.selectNoteId) {
+        if (action.payload.toFixed) {
+          if (item.id === action.payload.id) {
+            item.fixed = true
+          }
+        } else if (action.payload.toUnFixed) {
+          if (item.id === action.payload.id) {
+            item.fixed = false
+          }
+        } else if (item.id === state.selectNoteId) {
           item.title = action.payload.title
           item.text = action.payload.text
+          item.tags = action.payload.tags
         }
         return note
       })
@@ -121,7 +128,7 @@ export const reducer = (state = initialState, action) => {
         user: {
           id: action.payload.id,
           name: action.payload.name,
-          avatar: `${process.env.REACT_APP_API_URL_URL}/${action.payload.avatar}`,
+          avatar: action.payload.avatar,
           isLogin: true,
         },
       }

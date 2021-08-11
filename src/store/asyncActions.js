@@ -20,6 +20,7 @@ export const createAsyncNote = (data) => async (dispatch, getState) => {
   const res = await API.post('api/note', {
     title: data.title,
     text: data.text,
+    tags: data.tags,
     user_id: user.id,
     group_id: selectedGroup,
   })
@@ -65,9 +66,30 @@ export const editAsyncNotes = (data) => async (dispatch, getState) => {
     note_id: selectNoteId,
     newTitle: data.title,
     newText: data.text,
+    newTags: data.tags,
   })
   if (res.status === 200) {
-    dispatch(editNote({ title: data.title, text: data.text }))
+    dispatch(editNote({ title: data.title, text: data.text, tags: data.tags }))
+  }
+}
+
+export const fixedNote = (id) => async (dispatch) => {
+  const res = await API.put('api/note', {
+    note_id: id,
+    toFixed: true,
+  })
+  if (res.status === 200) {
+    dispatch(editNote({ toFixed: true, id }))
+  }
+}
+
+export const unFixedNote = (id) => async (dispatch) => {
+  const res = await API.put('api/note', {
+    note_id: id,
+    toUnFixed: true,
+  })
+  if (res.status === 200) {
+    dispatch(editNote({ toUnFixed: true, id }))
   }
 }
 
@@ -81,12 +103,11 @@ export const asyncDeleteNote = (id) => async (dispatch) => {
 }
 
 export const registration = (name, password, img) => async (dispatch) => {
-  const formData = new FormData()
-  formData.append('name', name)
-  formData.append('password', password)
-  formData.append('img', img)
-
-  const res = await API.post('api/user/registration', formData)
+  const res = await API.post('api/user/registration', {
+    name,
+    password,
+    img,
+  })
   if (!res.data.token) {
     return dispatch(setAuthError(res.data.message))
   }
@@ -117,7 +138,7 @@ export const login = (name, password) => async (dispatch) => {
 export const authCheck = () => async (dispatch) => {
   const res = await API.get('api/user/auth')
   if (!res.data.token) {
-    return
+    return false
   }
 
   if (res.data.token) {

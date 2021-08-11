@@ -1,15 +1,22 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Row } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../store/asyncActions'
 import './styles/Avatar.scss'
 
 const Avatar = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state)
   const [showLogout, setShowLogout] = useState(false)
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    history.push('/login')
+  }
 
   return (
     user.isLogin
@@ -22,7 +29,7 @@ const Avatar = () => {
           <button
             type="button"
             className={`avatar__logout ${showLogout ? 'hidden' : ''}`}
-            onClick={() => dispatch(logout())}
+            onClick={logoutHandler}
           >
             Logout
           </button>
